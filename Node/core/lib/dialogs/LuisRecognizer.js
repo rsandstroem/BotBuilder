@@ -73,7 +73,9 @@ var LuisRecognizer = (function () {
                         if (result.topScoringIntent && result.intents.length == 0) {
                             result.intents.push(result.topScoringIntent);
                         }
-                        if (result.intents.length == 1 && typeof result.intents[0].score !== 'number') {
+			if (result.topScoringIntent) { // fix
+                            result.intents[0] = result.topScoringIntent;
+                        } else if (result.intents.length == 1 && typeof result.intents[0].score !== 'number') {
                             result.intents[0].score = 1.0;
                         }
                     }
